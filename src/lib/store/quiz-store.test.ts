@@ -29,8 +29,8 @@ describe('useQuizStore', () => {
     expect(result2).toBe(true);
     expect(useQuizStore.getState().currentStep).toBe('trial3');
 
-    // Trial 3: utsumi
-    const result3 = useQuizStore.getState().submitAnswer('trial3', 'utsumi');
+    // Trial 3: daichi
+    const result3 = useQuizStore.getState().submitAnswer('trial3', 'daichi');
     expect(result3).toBe(true);
     expect(useQuizStore.getState().currentStep).toBe('reveal');
     expect(useQuizStore.getState().isAuthorized).toBe(true);

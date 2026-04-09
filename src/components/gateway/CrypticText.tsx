@@ -34,7 +34,7 @@ export const CrypticText = ({ text, onComplete }: CrypticTextProps) => {
   return (
     <div className="flex flex-col items-center justify-center space-y-4 px-6 text-center">
       <motion.p
-        className="mystic-glow max-w-2xl text-lg font-light tracking-widest text-mystic-gold sm:text-2xl"
+        className="mystic-glow max-w-2xl text-lg font-light tracking-widest text-mystic-gold sm:text-2xl whitespace-pre-wrap"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 2 }}
