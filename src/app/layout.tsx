@@ -13,7 +13,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "The Silent Order | 秘密結社への誘い",
+  title: "The Silent Order | 選ばれし者への招待",
   description: "汝の知識と覚悟が試される。覚悟なき者は立ち去れ。",
 };
 
