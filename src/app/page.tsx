@@ -1,65 +1,83 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { MysticBackground } from "@/components/gateway/MysticBackground";
+import { CrypticText } from "@/components/gateway/CrypticText";
+import { GatewayButton } from "@/components/gateway/GatewayButton";
 
 export default function Home() {
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const handleStartTrials = () => {
+    setIsTransitioning(true);
+    // Future: Add navigation to the first trial
+    console.log("Starting trials...");
+  };
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
+      <MysticBackground />
+
+      <AnimatePresence>
+        {!isTransitioning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+            transition={{ duration: 2 }}
+            className="z-10 flex flex-col items-center"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+            {/* Title Section */}
+            <motion.header
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1.5, delay: 0.5 }}
+              className="mb-16 text-center"
+            >
+              <h1 className="font-heading text-4xl tracking-[0.3em] text-mystic-gold sm:text-6xl md:text-7xl">
+                THE SILENT ORDER
+              </h1>
+              <div className="mt-4 h-px w-32 bg-mystic-gold/30 mx-auto" />
+              <p className="mt-4 font-light tracking-[0.5em] text-mystic-gold/60 text-xs sm:text-sm">
+                ESTABLISHED SINCE THE DAWN
+              </p>
+            </motion.header>
+
+            {/* Cryptic Message Section */}
+            <CrypticText
+              text="警告：これより先、汝の知識が試される。覚悟なき者は立ち去れ。"
+              onComplete={() => setIsTypingComplete(true)}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+            {/* CTA Section */}
+            {isTypingComplete && (
+              <GatewayButton onClick={handleStartTrials} />
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Transition Overlay */}
+      <AnimatePresence>
+        {isTransitioning && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-background"
           >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+            <motion.div
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.3, 1, 0.3],
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="h-16 w-16 border-2 border-mystic-gold rounded-full"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
   );
 }
