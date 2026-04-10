@@ -35,6 +35,11 @@ export const QUIZ_CONTENT = {
 export const REWARD_URL_ENCODED = 'aHR0cHM6Ly9tZWV0Lmdvb2dsZS5jb20vbmZqLXRkeGYtZXB0';
 
 /**
+ * Amazonお届け物URL (Base64難読化)
+ */
+export const AMAZON_GIFT_URL_ENCODED = 'aHR0cHM6Ly9hbXpuLmFzaWEvZC8wMkNqMUVpMQ==';
+
+/**
  * 最終メッセージ
  */
 export const REVEAL_MESSAGE = `10日22時からリモート飲み会しよう。\n必要なものは自宅に届けてある。`;
